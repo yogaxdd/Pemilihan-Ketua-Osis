@@ -112,3 +112,46 @@ function tutupVoting() {
     
     hasilDiv.scrollIntoView({ behavior: 'smooth' });
 }
+
+const toggleBtn = document.getElementById('menu-toggle');
+const mobileMenu = document.getElementById('mobile-menu');
+
+function closeMobileMenu() {
+  mobileMenu.classList.add('closing');
+  setTimeout(() => {
+    mobileMenu.classList.remove('show', 'closing');
+    toggleBtn.classList.remove('active');
+    toggleBtn.innerHTML = '&#9776;';
+  }, 300);
+}
+
+function openMobileMenu() {
+  mobileMenu.classList.add('show');
+  toggleBtn.classList.add('active');
+  toggleBtn.innerHTML = '×';
+}
+
+toggleBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  
+  if (mobileMenu.classList.contains('show')) {
+    closeMobileMenu();
+  } else {
+    openMobileMenu();
+  }
+});
+
+// Close menu when clicking outside
+document.addEventListener('click', (e) => {
+  if (!toggleBtn.contains(e.target) && !mobileMenu.contains(e.target) && mobileMenu.classList.contains('show')) {
+    closeMobileMenu();
+  }
+});
+
+// Close mobile menu when navigation links are clicked
+const mobileNavLinks = document.querySelectorAll('.mobile-menu a');
+mobileNavLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    closeMobileMenu();
+  });
+});

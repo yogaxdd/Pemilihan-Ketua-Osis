@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
-<body>
+<body id="top">
     <header>
         <nav class="navbar">
             <div class="logo">
@@ -17,11 +17,21 @@
                     <p>Pemilihan Ketua OSIS</p>
                 </div>
             </div>
-            <button class="menu-toggle">Menu</button>   
             <ul class="nav-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Pemilihan</a></li>
+                <li><a href="#top">Beranda</a></li>
+                <li><a href="#kandidat">Kandidat</a></li>
+                <li><a href="/voting.html">Voting</a></li>
             </ul>
+            <button class="menu-toggle" id="menu-toggle">
+                &#9776;
+            </button>
+            <div class="mobile-menu" id="mobile-menu">
+                <ul>
+                    <li><a href="#top">Beranda</a></li>
+                    <li><a href="#kandidat">Kandidat</a></li>
+                    <li><a href="/voting.html">Voting</a></li>
+                </ul>
+            </div>
         </nav>
     </header>
 
@@ -34,7 +44,7 @@
     </section>
     
     <div class="container">
-        <h1>Daftar Kandidat Ketua OSIS</h1>
+        <h1 id="kandidat">Daftar Kandidat Ketua OSIS</h1>
         <p>Gunakan hak anda untuk pilihan terbaik anda</p>
         <hr>
         <br>
@@ -70,10 +80,42 @@
                       </div>
                 </div>
             </div>
-            
-            <p class="jabatan-osis">Calon Ketua OSIS</p>
-
         </div>
+
+        <div class="kandidat-card">
+            <img src="img/calon2.jpg" alt="Kandidat 2">
+
+            <div class="info">
+                <h2>Haloo semuanya! Aku <b>Raditya Bambang Satriya</b></h2>
+                <p class="deskripsi">
+                    Perkenalkan, aku <b>Raditya Bambang Satriya</b> dari kelas <b>XI PPLG 1</b>. 
+                    Aku mencalonkan diri sebagai Ketua OSIS karena aku ingin membawa suasana baru yang lebih aktif, kompak, dan penuh inovasi di sekolah kita. 
+                    Aku percaya bahwa setiap siswa punya potensi besar, dan OSIS harus jadi tempat yang bisa mendukung potensi itu berkembang. 
+                    Dengan semangat kerja sama, komunikasi yang baik, dan niat untuk memperbaiki lingkungan sekolah, aku siap menjadi pemimpin yang terbuka, tanggap, dan bisa jadi teman untuk semua.
+                </p>
+
+                <div class="visi-misi">
+                    <div class="visi">
+                        <h3>Visi</h3>
+                        <ul>
+                            <li>Menjadikan OSIS sebagai organisasi yang modern, terbuka, dan mampu menjadi contoh positif bagi seluruh siswa.</li>
+                        </ul>
+                    </div>
+
+                    <div class="misi">
+                        <h3>Misi</h3>
+                        <ul>
+                            <li>Mengajak siswa lebih aktif terlibat dalam kegiatan OSIS dan sekolah.</li>
+                            <li>Menyelenggarakan program kreatif yang mendukung bakat, hobi, dan prestasi siswa.</li>
+                            <li>Membangun komunikasi yang baik antara siswa, guru, dan pengurus OSIS.</li>
+                            <li>Mengembangkan kegiatan sosial yang bermanfaat untuk lingkungan sekitar.</li>
+                            <li>Menumbuhkan rasa disiplin, tanggung jawab, dan solidaritas dalam setiap kegiatan.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
     <script src="script.js"></script>
 </body>
