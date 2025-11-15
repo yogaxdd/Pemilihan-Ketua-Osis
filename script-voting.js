@@ -32,6 +32,7 @@ const candidates = [
 let selectedCandidate = null;
 let votingData = {
     votes: { 1: 0, 2: 0, 3: 0, 4: 0 },
+    voteTimestamps: { 1: [], 2: [], 3: [], 4: [] },
     totalVotes: 0,
     votingClosed: false,
     finalResults: null
@@ -96,6 +97,7 @@ function selectCandidate(candidateId) {
     
     if (confirm(confirmMessage)) {
         votingData.votes[candidateId]++;
+        votingData.voteTimestamps[candidateId].push(Date.now());
         votingData.totalVotes++;
 
         saveVotingData();
@@ -125,6 +127,7 @@ function confirmVote() {
     
     if (confirm(confirmMessage)) {
         votingData.votes[selectedCandidate]++;
+        votingData.voteTimestamps[selectedCandidate].push(Date.now());
         votingData.totalVotes++;
 
         saveVotingData();
@@ -181,8 +184,16 @@ function updateResults() {
     const sortedCandidates = candidates.map(candidate => ({
         ...candidate,
         votes: votingData.votes[candidate.id],
-        percentage: votingData.totalVotes > 0 ? (votingData.votes[candidate.id] / votingData.totalVotes * 100) : 0
-    })).sort((a, b) => b.votes - a.votes);
+        percentage: votingData.totalVotes > 0 ? (votingData.votes[candidate.id] / votingData.totalVotes * 100) : 0,
+        firstVoteTime: votingData.voteTimestamps[candidate.id].length > 0 ? Math.min(...votingData.voteTimestamps[candidate.id]) : Infinity
+    })).sort((a, b) => {
+        // Pertama urutkan berdasarkan jumlah vote (descending)
+        if (b.votes !== a.votes) {
+            return b.votes - a.votes;
+        }
+        // Jika vote sama, urutkan berdasarkan siapa yang vote lebih dulu (ascending timestamp)
+        return a.firstVoteTime - b.firstVoteTime;
+    });
 
     sortedCandidates.forEach(candidate => {
         const statHTML = `
@@ -229,9 +240,17 @@ function closeVoting() {
         
         if (confirm(confirmMessage)) {
             const sortedCandidates = candidates.map(candidate => ({
-                ...candidate,
-                votes: votingData.votes[candidate.id]
-            })).sort((a, b) => b.votes - a.votes);
+            ...candidate,
+            votes: votingData.votes[candidate.id],
+            firstVoteTime: votingData.voteTimestamps[candidate.id].length > 0 ? Math.min(...votingData.voteTimestamps[candidate.id]) : Infinity
+        })).sort((a, b) => {
+            // Pertama urutkan berdasarkan jumlah vote (descending)
+            if (b.votes !== a.votes) {
+                return b.votes - a.votes;
+            }
+            // Jika vote sama, urutkan berdasarkan siapa yang vote lebih dulu (ascending timestamp)
+            return a.firstVoteTime - b.firstVoteTime;
+        });
 
             const positions = ['Ketua OSIS', 'Wakil Ketua OSIS', 'Sekretaris OSIS', 'Bendahara OSIS'];
             
@@ -312,6 +331,7 @@ function resetVoting() {
             localStorage.removeItem('osisVotingData');
             votingData = {
                 votes: { 1: 0, 2: 0, 3: 0, 4: 0 },
+                voteTimestamps: { 1: [], 2: [], 3: [], 4: [] },
                 totalVotes: 0,
                 votingClosed: false,
                 finalResults: null
