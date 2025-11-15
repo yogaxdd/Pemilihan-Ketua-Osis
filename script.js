@@ -29,8 +29,6 @@ function vote(nomorCalon) {
     let totalSuara = suaraCalon1 + suaraCalon2 + suaraCalon3;
     
     document.getElementById('totalVote').textContent = totalSuara;
-    
-    // alert(`Vote berhasil untuk ${dataCalon[nomorCalon - 1].nama}. Total suara sekarang: ${totalSuara}`);
 }
 
 function tutupVoting() {

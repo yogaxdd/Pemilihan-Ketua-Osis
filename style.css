@@ -55,6 +55,41 @@ html {
     }
 }
 
+/* Footer Styles */
+footer {
+    background: linear-gradient(135deg, #0C2B4E, #1a4d72);
+    color: white;
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 50px;
+    border-top: 4px solid #FFD700;
+}
+
+footer p {
+    margin: 0 0 15px 0;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+footer nav {
+    margin-top: 10px;
+}
+
+footer nav a {
+    color: #FFD700;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+footer nav a:hover {
+    background-color: rgba(255, 215, 0, 0.2);
+    color: white;
+    transform: translateY(-2px);
+}
+
 .container:hover {
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
     transform: translateY(-2px);
